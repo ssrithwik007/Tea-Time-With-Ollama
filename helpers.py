@@ -3,39 +3,21 @@ import streamlit as st
 import streamlit.components.v1 as components
 from st_copy_to_clipboard import st_copy_to_clipboard
 
-def copy_button(text: str, key: str):
-    escaped = json.dumps(text)
-
-    components.html(
-        f"""
-        <button
-            onclick="navigator.clipboard.writeText({escaped})"
-            style="
-                border:none;
-                background:#2d2d2d;
-                color:white;
-                padding:6px 12px;
-                border-radius:8px;
-                cursor:pointer;
-                font-size:14px;
-            "
-        >
-            📋 Copy
-        </button>
-        """,
-        height=40,
-    )
-
 def render_message(role, content):
+
     if role == "user":
+
         st.markdown(f"""
-        <div style="display:flex; justify-content:flex-end; margin:12px 0;">
+        <div style="display:flex; justify-content:flex-end; margin:14px 0;">
             <div style="
-                background:#2563eb;
-                color:white;
-                padding:12px 16px;
-                border-radius:18px;
-                max-width:70%;
+                background:#C68B59;
+                color:#1A1816;
+                padding:14px 18px;
+                border-radius:20px 20px 6px 20px;
+                max-width:72%;
+                line-height:1.6;
+                box-shadow:0 2px 6px rgba(0,0,0,.25);
+                word-wrap:break-word;
             ">
                 {content}
             </div>
@@ -43,20 +25,24 @@ def render_message(role, content):
         """, unsafe_allow_html=True)
 
     else:
+
         st.markdown(f"""
-        <div style="display:flex; justify-content:flex-start; margin:12px 0;">
+        <div style="display:flex; justify-content:flex-start; margin:14px 0;">
             <div style="
-                background:#374151;
-                color:white;
-                padding:12px 16px;
-                border-radius:18px;
-                max-width:70%;
+                background:#332D28;
+                color:#F5F2EB;
+                padding:14px 18px;
+                border-radius:20px 20px 20px 6px;
+                max-width:72%;
+                line-height:1.6;
+                border:1px solid #4E433B;
+                box-shadow:0 2px 6px rgba(0,0,0,.25);
+                word-wrap:break-word;
             ">
                 {content}
             </div>
         </div>
         """, unsafe_allow_html=True)
-        st_copy_to_clipboard(content, "📋 Copy")
 
 def export_chat(messages):
     lines = ["# Tea Time with Ollama\n"]
